@@ -39,9 +39,9 @@ mkdir /data/db
 ```
 
 ### Common Commands
-Set Python version to either Python 2 or 3
+Set Python version to either Python 2 (0) or 3 (1). The implant that comes with this uses Python 3 functionality, so it is important to set the Python version being used as appropriate.
 
 ```
-!set python 1 > Python 3
-!set python 0 > Python 2
+!set python 1 
+!set python 0 
 ```
