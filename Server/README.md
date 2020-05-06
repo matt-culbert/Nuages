@@ -37,3 +37,10 @@ mkdir /data/db
 # This command starts the Mongo server and must be run before running Nuages
 ./mongod --dbpath /data/db --logpath /var/log/mongodb/mongod.log
 ```
+
+### Common Commands
+Set Python version to either Python 2 or 3
+'''
+!set python 1 > Python 3
+!set python 0 > Python 2
+'''
