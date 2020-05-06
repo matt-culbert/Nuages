@@ -40,7 +40,8 @@ mkdir /data/db
 
 ### Common Commands
 Set Python version to either Python 2 or 3
-'''
+
+```
 !set python 1 > Python 3
 !set python 0 > Python 2
-'''
+```
