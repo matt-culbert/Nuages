@@ -8,6 +8,10 @@ const BCRYPT_WORK_FACTOR_BASE = 12;
 const BCRYPT_DATE_BASE = 1483228800000;
 const BCRYPT_WORK_INCREASE_INTERVAL = 47300000000;
 
+const args = process.argv.slice(3);
+
+const nuagesUser.username = args[1]
+
 function hasher (password) {
   return new Promise((resolve, reject) => {
     let BCRYPT_CURRENT_DATE = new Date().getTime();
@@ -33,51 +37,17 @@ const sourceFileName = './config/template.json';
 const destinationFileName = './config/production.json';
 const sourceFile = require(sourceFileName);
 
-nuagesUser = {}
-
-var nuagesUserQuestions = [
-  {
-    type: 'input',
-    message: 'Enter the username of the Nuages user:  ',
-    name: 'username',
-  },
-  {
-    type: 'password',
-    message: 'Enter the password of the Nuages user:  ',
-    name: 'password1',
-    mask: '*',
-  },
-  {
-    type: 'password',
-    message: 'Retype the password of the Nuages user: ',
-    name: 'password2',
-    mask: '*',
-  }
-];
+nuagesUser = {args[1], args[2]}
 
 function promptNuagesUser() {
-  inquirer.prompt(nuagesUserQuestions).then(answers => {
-    if (answers.password1 != answers.password2) {
-      console.log("  Passwords do not match!")
-      promptNuagesUser();
-    } else {
-      nuagesUser = answers;
-      hasher(nuagesUser.password1).then((hash)=>{
+    hasher(nuagesUser.args[1]).then((hash)=>{
         nuagesUser.password = hash;
         promptMongoDB();
-      });
-    }
-  });
+    });
 }
 
 function promptMongoDB() {
-  inquirer.prompt([{
-    type: 'input',
-    message: 'Enter the mongodb connection string:  ',
-    name: 'mongodb',
-    default: 'mongodb://localhost:27017/nuages_c_2'
-  }]).then(answers => {
-    MongoClient.connect(answers.mongodb, { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(args[3], { useNewUrlParser: true }, function(err, db) {
         if (err){
           console.log("  Error connecting to MongoDB: " + err.message);
           promptMongoDB();
@@ -102,8 +72,7 @@ function promptMongoDB() {
         });
         }
     });
-  });
-}
+};
+
 
 promptNuagesUser();
-
