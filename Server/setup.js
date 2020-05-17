@@ -8,7 +8,7 @@ const BCRYPT_WORK_FACTOR_BASE = 12;
 const BCRYPT_DATE_BASE = 1483228800000;
 const BCRYPT_WORK_INCREASE_INTERVAL = 47300000000;
 
-const args = process.argv.slice(3);
+const args = process.argv.slice(2);
 
 hashedpw = '';
 
