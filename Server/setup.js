@@ -38,21 +38,21 @@ const destinationFileName = './config/production.json';
 const sourceFile = require(sourceFileName);
 
 function promptNuagesUser() {
-    hasher(nuagesUser.args[1]).then((hash)=>{
+    hasher(args[1]).then((hash)=>{
         hashedpw = hash;
         promptMongoDB();
     });
 }
 
 function promptMongoDB() {
-    MongoClient.connect(args[3], { useNewUrlParser: true }, function(err, db) {
+    MongoClient.connect(args[2], { useNewUrlParser: true }, function(err, db) {
         if (err){
           console.log("  Error connecting to MongoDB: " + err.message);
           promptMongoDB();
         }else{
           var dbo = db.db(db.s.options.dbName);
           dbo.collection('users').insertOne({
-              email: nuagesUser.username,
+              email: args[0],
               password: hashedpw
           },function (error, response) {
             if(err) {
