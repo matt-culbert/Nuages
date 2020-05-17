@@ -10,7 +10,7 @@ const BCRYPT_WORK_INCREASE_INTERVAL = 47300000000;
 
 const args = process.argv.slice(3);
 
-const nuagesUser.username = args[1]
+hashedpw = '';
 
 function hasher (password) {
   return new Promise((resolve, reject) => {
@@ -37,11 +37,9 @@ const sourceFileName = './config/template.json';
 const destinationFileName = './config/production.json';
 const sourceFile = require(sourceFileName);
 
-nuagesUser = {args[1], args[2]}
-
 function promptNuagesUser() {
     hasher(nuagesUser.args[1]).then((hash)=>{
-        nuagesUser.password = hash;
+        hashedpw = hash;
         promptMongoDB();
     });
 }
@@ -55,7 +53,7 @@ function promptMongoDB() {
           var dbo = db.db(db.s.options.dbName);
           dbo.collection('users').insertOne({
               email: nuagesUser.username,
-              password: nuagesUser.password
+              password: hashedpw
           },function (error, response) {
             if(err) {
               console.log("  Error creating the Nuages user: " + err.message);
