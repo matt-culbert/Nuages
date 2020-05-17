@@ -59,7 +59,7 @@ function promptMongoDB() {
               console.log("  Error creating the Nuages user: " + err.message);
               promptMongoDB();
             } else {
-                sourceFile.mongodb = answers.mongodb;
+                sourceFile.mongodb = args[2];
                 sourceFile.authentication.secret = crypto.randomBytes(256).toString('hex');
                 fs.writeFile(destinationFileName, JSON.stringify(sourceFile, null, 2), function writeJSON(err) {
                   if (err) return console.log(err); else process.exit(0);
